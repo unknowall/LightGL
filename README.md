@@ -10,12 +10,16 @@ LightGL is built specifically for high-performance graphics rendering.
 
 Its call efficiency is almost identical to that of native C/C++ implementations, outperforming general-purpose OpenGL wrapper libraries.
 
+**file size: LightGL.1.0.2.nupkg - 54kb**
+
 <details>
 <summary><h3> 🌐 中文版说明</h3></summary>
   
 LightGL是一个针对**OpenGL的C#轻量封装库**，提供简洁、高效、跨平台的图形渲染解决方案。
 
 LightGL专为高性能图形渲染打造，相比通用 OpenGL 封装库，调用效率和原生 C/C++ 调用几乎无差。
+
+**包大小：LightGL.1.0.2.nupkg - 54kb**
   
 ## 核心特性
 
@@ -27,7 +31,7 @@ LightGL专为高性能图形渲染打造，相比通用 OpenGL 封装库，调�
 ### 🌍 多平台支持
 - 统一接口设计，适配Windows、Linux、macOS等主流操作系统
 - 基于平台抽象层实现OpenGL上下文管理，无需修改代码即可跨平台运行
-- 兼容OpenGL 3.2+核心配置文件，适配主流显卡驱动
+- 兼容OpenGL 3.2+，适配主流显卡驱动
 - 统一的 IGlContext 接口为不同操作系统提供了专门的实现：
   - Windows 平台：使用 WGL 实现，支持 OpenGL 3.2 +
   - Linux 平台：使用 GLX 实现，支持 X11 窗口系统，提供了完整的 Linux 平台 OpenGL 上下文管理
@@ -60,7 +64,7 @@ git clone https://github.com/unknowall/LightGL.git
 ```
 nuget:
 ```bash
-dotnet add package LightGL --version 1.0.1
+dotnet add package LightGL --version 1.0.2
 ```
 
 ### 2. 编译项目
@@ -196,9 +200,9 @@ LightGL/
 ### 🌍 Cross-Platform Support
 - Unified interface design compatible with mainstream operating systems including Windows, Linux, and macOS
 - OpenGL context management implemented via a platform abstraction layer, enabling cross-platform operation without code modification
-- Compatible with OpenGL 3.2+ core profile and mainstream graphics card drivers
+- Compatible with OpenGL 3.2+ and mainstream graphics card drivers
 - The unified `IGlContext` interface provides dedicated implementations for different operating systems:
-  - **Windows**: Built on WGL, supporting OpenGL 3.2+ core profile
+  - **Windows**: Built on WGL, supporting OpenGL 3.2+
   - **Linux**: Built on GLX, supporting the X11 window system with complete OpenGL context management for Linux platforms
   - **macOS**: Built on Cocoa’s `NSOpenGLContext`, supporting macOS’s native OpenGL framework
   - **Android**: Provides a basic `AndroidGLContext` implementation based on the EGL (Embedded System Graphics Library) interface
@@ -228,7 +232,7 @@ git clone https://github.com/unknowall/LightGL.git
 ```
 nuget:
 ```bash
-dotnet add package LightGL --version 1.0.1
+dotnet add package LightGL --version 1.0.2
 ```
 
 ### 2. Build the Project
