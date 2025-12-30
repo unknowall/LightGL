@@ -9,7 +9,7 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <Title>LightGL</Title>
-        <Version>1.0.3</Version>
+        <Version>1.0.4</Version>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <Authors>unknowall - sgfree@hotmail.com</Authors>
         <RepositoryUrl>https://github.com/unknowall/LightGL</RepositoryUrl>

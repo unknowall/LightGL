@@ -143,14 +143,12 @@ namespace LightGL.Android
 
         public IGlContext SetSync(int Sync)
         {
-            // eglSwapInterval 返回 bool
             EGL.eglSwapInterval(Display, Sync);
             return this;
         }
 
         public void Dispose()
         {
-            // 释放 context / surface，并维护共享上下文引用计数
             if (Context != EGL.EGL_NO_CONTEXT)
             {
                 lock (_sharedLock)

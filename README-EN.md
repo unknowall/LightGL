@@ -5,7 +5,9 @@ LightGL is a **lightweight C# wrapper library for OpenGL**, offering a concise, 
 LightGL is built specifically for high-performance graphics rendering. 
 Its call efficiency is almost identical to that of native C/C++ implementations, outperforming general-purpose OpenGL wrapper libraries.
 
-**file size: LightGL.1.0.2.nupkg - 54kb**
+**file size: LightGL.1.0.x.nupkg ~56kb**
+
+Wiki: https://deepwiki.com/unknowall/LightGL , https://zread.ai/unknowall/LightGL
 
 ## Core Features
 

@@ -329,7 +329,6 @@ namespace LightGL.Linux
 
         public void Dispose()
         {
-            // 释放上下文并维护共享上下文引用计数
             if (Context != IntPtr.Zero)
             {
                 bool destroyed = false;
@@ -337,7 +336,6 @@ namespace LightGL.Linux
                 {
                     if (_sharedContext != IntPtr.Zero && Context == _sharedContext)
                     {
-                        // 释放共享根：减少计数，计数为0时真正释放
                         _sharedRefCount = Math.Max(0, _sharedRefCount - 1);
                         if (_sharedRefCount == 0)
                         {
@@ -348,10 +346,8 @@ namespace LightGL.Linux
                     }
                     else
                     {
-                        // 非共享根，直接销毁
                         GLX.glXDestroyContext(Display, Context);
                         destroyed = true;
-                        // 也尝试减少共享计数（如果之前创建时增加过）
                         if (_sharedContext != IntPtr.Zero && _sharedRefCount > 0)
                         {
                             _sharedRefCount = Math.Max(0, _sharedRefCount - 1);
