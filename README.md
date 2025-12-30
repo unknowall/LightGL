@@ -2,10 +2,10 @@
 
 LightGL is a **lightweight C# wrapper library for OpenGL**, offering a concise, efficient, and cross-platform graphics rendering solution.
 
-LightGL是一个针对**OpenGL的C#轻量封装库**，提供简洁、高效、跨平台的图形渲染解决方案。
-
 <details>
 <summary><h3> 🌐 中文版说明</h3></summary>
+  
+LightGL是一个针对**OpenGL的C#轻量封装库**，提供简洁、高效、跨平台的图形渲染解决方案。
   
 ## 核心特性
 
@@ -163,6 +163,10 @@ LightGL/
 - 商业使用、修改、分发
 - 私人使用
 - 无需公开修改后的源码（但需保留原版权声明）
+
+## 联系与反馈
+
+- 如有问题或建议，欢迎提交Issue或Pull Request
 
 ------
 </details>
@@ -323,6 +327,3 @@ This project is licensed under the **MIT License**, which permits:
 ## Contact & Feedback
 - For questions or suggestions, feel free to submit Issues or Pull Requests
 
-## 联系与反馈
-
-- 如有问题或建议，欢迎提交Issue或Pull Request
