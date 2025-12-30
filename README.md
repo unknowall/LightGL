@@ -1,7 +1,8 @@
 # LightGL - A Lightweight OpenGL C# Wrapper Library
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Build Pass](https://img.shields.io/badge/Build-Pass-brightgreen)](https://github.com/unknowall/LightGL)
 [![NuGet](https://img.shields.io/nuget/v/LightGL)](https://www.nuget.org/packages/LightGL/)
-[![GitHub Packages](https://img.shields.io/badge/github-packages-blue)](https://github.com/unknowall/LightGL/pkgs/nuget/LightGL)
+[![GitHub NuGet Package](https://img.shields.io/badge/GitHub%20Package-LightGL-blue)](https://github.com/unknowall/LightGL/pkgs/nuget/LightGL)
 
 
 LightGL is a **lightweight C# wrapper library for OpenGL**, offering a concise, efficient, and cross-platform graphics rendering solution.
@@ -64,6 +65,10 @@ git clone https://github.com/unknowall/LightGL.git
 ```
 nuget:
 ```bash
+git clone https://github.com/unknowall/LightGL.git
+```
+nuget:
+```bash
 dotnet add package LightGL --version 1.0.2
 ```
 
@@ -73,7 +78,7 @@ dotnet add package LightGL --version 1.0.2
 - 编译生成
 
 ### 3. 集成使用
-在你的C#项目中引用 LightGL.dll，或通过nuget安装LightGL包，参考以下示例代码快速实现基础渲染：
+在你的C#项目中引用 LightGL，参考以下示例代码快速实现基础渲染：
 
 ```csharp
 // 1. 创建OpenGL上下文（以窗口句柄为例）
@@ -241,7 +246,7 @@ dotnet add package LightGL --version 1.0.2
 - Build the project
 
 ### 3. Integration & Usage
-Reference the LightGL.dll in your C# project, or install the LightGL package via NuGet. Refer to the following sample code to quickly implement basic rendering.:
+Reference `LightGL` in your C# project, and use the following sample code to quickly implement basic rendering:
 
 ```csharp
 // 1. Create OpenGL context (window handle example)
