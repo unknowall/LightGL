@@ -268,18 +268,17 @@ namespace LightGL.Windows
                     _sharedContextRefCount++;
                 }
             }
-            SetVSync(false);
+
+            SetVSync(1);
 
         }
 
-        public void SetVSync(bool Enable = false)
+        public void SetVSync(int Sync = 1)
         {
             if (Extension.wglSwapIntervalEXT != null)
             {
-                if (Enable)
-                    Extension.wglSwapIntervalEXT(1);
-                else
-                    Extension.wglSwapIntervalEXT(0);
+                // 0 = no vsync, 1 = vsync
+                Extension.wglSwapIntervalEXT(Sync);
             }
         }
 
@@ -361,6 +360,12 @@ namespace LightGL.Windows
         public IGlContext SwapBuffers()
         {
             Wgl.wglSwapBuffers(_dc);
+            return this;
+        }
+
+        public IGlContext SetSync(int Sync)
+        {
+            SetVSync(Sync);
             return this;
         }
 
