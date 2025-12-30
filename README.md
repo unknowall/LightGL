@@ -44,8 +44,13 @@ LightGL是一个针对**OpenGL的C#轻量封装库**，提供简洁、高效、�
 ## 快速开始
 
 ### 1. 获取项目
+git:
 ```bash
 git clone https://github.com/unknowall/LightGL.git
+```
+nuget:
+```bash
+dotnet add package LightGL --version 1.0.1
 ```
 
 ### 2. 编译项目
@@ -207,8 +212,13 @@ LightGL/
 ## Quick Start
 
 ### 1. Get the Project
+git:
 ```bash
 git clone https://github.com/unknowall/LightGL.git
+```
+nuget:
+```bash
+dotnet add package LightGL --version 1.0.1
 ```
 
 ### 2. Build the Project
