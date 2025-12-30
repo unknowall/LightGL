@@ -3,6 +3,7 @@
 [![Build Pass](https://img.shields.io/badge/Build-Pass-brightgreen)](https://github.com/unknowall/LightGL)
 [![NuGet](https://img.shields.io/nuget/v/LightGL)](https://www.nuget.org/packages/LightGL/)
 [![GitHub NuGet Package](https://img.shields.io/badge/GitHub%20Package-LightGL-blue)](https://github.com/unknowall/LightGL/pkgs/nuget/LightGL)
+[![zread](https://img.shields.io/badge/Ask_Zread-_.svg?style=flat&color=00b0aa&labelColor=000000&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQuOTYxNTYgMS42MDAxSDIuMjQxNTZDMS44ODgxIDEuNjAwMSAxLjYwMTU2IDEuODg2NjQgMS42MDE1NiAyLjI0MDFWNC45NjAxQzEuNjAxNTYgNS4zMTM1NiAxLjg4ODEgNS42MDAxIDIuMjQxNTYgNS42MDAxSDQuOTYxNTZDNS4zMTUwMiA1LjYwMDEgNS42MDE1NiA1LjMxMzU2IDUuNjAxNTYgNC45NjAxVjIuMjQwMUM1LjYwMTU2IDEuODg2NjQgNS4zMTUwMiAxLjYwMDEgNC45NjE1NiAxLjYwMDFaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik00Ljk2MTU2IDEwLjM5OTlIMi4yNDE1NkMxLjg4ODEgMTAuMzk5OSAxLjYwMTU2IDEwLjY4NjQgMS42MDE1NiAxMS4wMzk5VjEzLjc1OTlDMS42MDE1NiAxNC4xMTM0IDEuODg4MSAxNC4zOTk5IDIuMjQxNTYgMTQuMzk5OUg0Ljk2MTU2QzUuMzE1MDIgMTQuMzk5OSA1LjYwMTU2IDE0LjExMzQgNS42MDE1NiAxMy43NTk5VjExLjAzOTlDNS42MDE1NiAxMC42ODY0IDUuMzE1MDIgMTAuMzk5OSA0Ljk2MTU2IDEwLjM5OTlaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik0xMy43NTg0IDEuNjAwMUgxMS4wMzg0QzEwLjY4NSAxLjYwMDEgMTAuMzk4NCAxLjg4NjY0IDEwLjM5ODQgMi4yNDAxVjQuOTYwMUMxMC4zOTg0IDUuMzEzNTYgMTAuNjg1IDUuNjAwMSAxMS4wMzg0IDUuNjAwMUgxMy43NTg0QzE0LjExMTkgNS42MDAxIDE0LjM5ODQgNS4zMTM1NiAxNC4zOTg0IDQuOTYwMVYyLjI0MDFDMTQuMzk4NCAxLjg4NjY0IDE0LjExMTkgMS42MDAxIDEzLjc1ODQgMS42MDAxWiIgZmlsbD0iI2ZmZiIvPgo8cGF0aCBkPSJNNCAxMkwxMiA0TDQgMTJaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik00IDEyTDEyIDQiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K&logoColor=ffffff)](https://zread.ai/unknowall/LightGL)
 
 
 LightGL is a **lightweight C# wrapper library for OpenGL**, offering a concise, efficient, and cross-platform graphics rendering solution.
@@ -13,6 +14,8 @@ Its call efficiency is almost identical to that of native C/C++ implementations,
 
 **file size: LightGL.1.0.2.nupkg - 54kb**
 
+#### Wiki(for 1.0.2): https://deepwiki.com/unknowall/LightGL , https://zread.ai/unknowall/LightGL
+
 <details>
 <summary><h3> 🌐 中文版说明</h3></summary>
   
@@ -21,6 +24,8 @@ LightGL是一个针对**OpenGL的C#轻量封装库**，提供简洁、高效、�
 LightGL专为高性能图形渲染打造，相比通用 OpenGL 封装库，调用效率和原生 C/C++ 调用几乎无差。
 
 **包大小：LightGL.1.0.2.nupkg - 54kb**
+
+#### Wiki: https://zread.ai/unknowall/LightGL , https://deepwiki.com/unknowall/LightGL
   
 ## 核心特性
 
