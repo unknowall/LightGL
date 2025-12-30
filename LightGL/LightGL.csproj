@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <LangVersion>9</LangVersion>
+        <NullableContextOptions>disable</NullableContextOptions>
+        <RootNamespace>LightGL</RootNamespace>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <TargetFramework>net8.0-windows7.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <Title>LightGL</Title>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <Authors>unknowall - sgfree@hotmail.com</Authors>
+        <RepositoryUrl>https://github.com/unknowall/LightGL</RepositoryUrl>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <PlatformTarget>AnyCPU</PlatformTarget>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <PlatformTarget>AnyCPU</PlatformTarget>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <NoWarn>1701;1702;8618;8625</NoWarn>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+      <NoWarn>1701;1702;8618;8625</NoWarn>
+    </PropertyGroup>
+
+</Project>
