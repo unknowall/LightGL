@@ -320,8 +320,6 @@ This project is licensed under the **MIT License**, which permits:
 - Private use
 - No requirement to disclose modified source code (original copyright notice must be retained)
 
-Full license text is available in [LICENSE.txt](LICENSE.txt)
-
 ## Contact & Feedback
 - For questions or suggestions, feel free to submit Issues or Pull Requests
 
