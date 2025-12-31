@@ -26,7 +26,7 @@ class Program
     }
     static ShaderInfoClass ShaderInfo = new ShaderInfoClass();
 
-    static RectangleF TextureRect;
+    static GLRectangleF TextureRect;
 
     [STAThreadAttribute]
     private static void Main(string[] args)
@@ -52,7 +52,7 @@ class Program
         Context = GlContextFactory.CreateFromWindowHandle(windowhwnd);
         Context.MakeCurrent();
 
-		VertexBuffer = GLBuffer.Create().SetData(RectangleF.FromCoords(-1, -1, +1, +1).GetFloat2TriangleStripCoords());
+		VertexBuffer = GLBuffer.Create().SetData(GLRectangleF.FromCoords(-1, -1, +1, +1).GetFloat2TriangleStripCoords());
 
         Shader = new GLShader(
             "attribute vec4 position; attribute vec4 texCoords; varying vec2 v_texCoord; void main() { gl_Position = position; v_texCoord = texCoords.xy; }",
@@ -61,7 +61,7 @@ class Program
         
         Shader.BindUniformsAndAttributes(ShaderInfo);
 
-		TextureRect = RectangleF.FromCoords(0, 0, 1024 / 1024f, 768 / 768f);
+		TextureRect = GLRectangleF.FromCoords(0, 0, 1024 / 1024f, 768 / 768f);
 		TextureRect.VFlip();
 		TexCoordsBuffer = GLBuffer.Create().SetData(TextureRect.GetFloat2TriangleStripCoords());
 		ShaderInfo.position.SetData<float>(VertexBuffer, 2);
