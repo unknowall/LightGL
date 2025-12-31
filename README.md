@@ -242,7 +242,7 @@ git clone https://github.com/unknowall/LightGL.git
 ```
 nuget:
 ```bash
-dotnet add package LightGL --version 1.0.2
+dotnet add package LightGL --version 1.0.4
 ```
 
 ### 2. Build the Project
