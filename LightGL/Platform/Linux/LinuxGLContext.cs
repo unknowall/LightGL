@@ -16,6 +16,7 @@ namespace LightGL.Linux
         //static public IntPtr DefaultRootWindow;
         private static IntPtr _sharedContext;
         private static readonly object _sharedLock = new object();
+        private static readonly object s_makeCurrentLock = new object();
         private static int _sharedRefCount = 0;
 
         private IntPtr Display;
@@ -285,7 +286,7 @@ namespace LightGL.Linux
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate int GlXSwapIntervalMESADelegate(int interval);
 
-        public IGlContext SetSync(int Sync)
+        public IGlContext SetVSync(int vsync)
         {
             IntPtr proc;
 
@@ -295,7 +296,7 @@ namespace LightGL.Linux
                 try
                 {
                     var del = Marshal.GetDelegateForFunctionPointer<GlXSwapIntervalEXTDelegate>(proc);
-                    del(Display, WindowHandle, Sync);
+                    del(Display, WindowHandle, vsync);
                     return this;
                 }
                 catch { }
@@ -306,7 +307,7 @@ namespace LightGL.Linux
                 try
                 {
                     var del = Marshal.GetDelegateForFunctionPointer<GlXSwapIntervalSGIDelegate>(proc);
-                    del(Sync);
+                    del(vsync);
                     return this;
                 }
                 catch { }
@@ -318,7 +319,7 @@ namespace LightGL.Linux
                 try
                 {
                     var del = Marshal.GetDelegateForFunctionPointer<GlXSwapIntervalMESADelegate>(proc);
-                    del(Sync);
+                    del(vsync);
                     return this;
                 }
                 catch { }

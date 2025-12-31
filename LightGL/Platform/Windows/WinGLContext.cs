@@ -19,6 +19,7 @@ namespace LightGL.Windows
         public static IntPtr _sharedContext;
         private static int _sharedContextRefCount = 0;
         private static readonly object s_shareLock = new object();
+        private static readonly object s_makeCurrentLock = new object();
 
         [DllImport("User32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr GetWindowDC(IntPtr hWnd);
@@ -222,7 +223,8 @@ namespace LightGL.Windows
                     if (_sharedContextRefCount >= 0 && _sharedContext != IntPtr.Zero && Wgl.wglShareLists(_sharedContext, _context))
                     {
                         _sharedContextRefCount++;
-                    } else
+                    }
+                    else
                     {
                     }
                 }
@@ -263,7 +265,8 @@ namespace LightGL.Windows
                 {
                     _sharedContext = _context;
                     _sharedContextRefCount = 1;
-                } else
+                }
+                else
                 {
                     _sharedContextRefCount++;
                 }
@@ -271,15 +274,6 @@ namespace LightGL.Windows
 
             SetVSync(1);
 
-        }
-
-        public void SetVSync(int Sync = 1)
-        {
-            if (Extension.wglSwapIntervalEXT != null)
-            {
-                // 0 = no vsync, 1 = vsync
-                Extension.wglSwapIntervalEXT(Sync);
-            }
         }
 
         public GlContextSize Size
@@ -331,29 +325,33 @@ namespace LightGL.Windows
 
         public IGlContext MakeCurrent()
         {
-            if (GlContextFactory.Current != this)
+            lock (s_makeCurrentLock)
             {
-                if (!Wgl.wglMakeCurrent(_dc, _context))
+                if (GlContextFactory.Current != this)
                 {
-                    Console.WriteLine($"Can't MakeCurrent DC {_dc} context {_context}");
+                    if (!Wgl.wglMakeCurrent(_dc, _context))
+                    {
+                        Console.WriteLine($"Can't MakeCurrent DC {_dc} context {_context}");
+                    }
+                    GlContextFactory.Current = this;
                 }
-                GlContextFactory.Current = this;
             }
-            //Console.WriteLine($"WinGlContext MakeCurrent DC {_dc} context {_context}");
             return this;
         }
 
         public IGlContext ReleaseCurrent()
         {
-            if (GlContextFactory.Current != null)
+            lock (s_makeCurrentLock)
             {
-                if (!Wgl.wglMakeCurrent(_dc, IntPtr.Zero))
+                if (GlContextFactory.Current != null)
                 {
-                    Console.WriteLine($"Can't ReleaseCurrent DC {_dc} context {_context}");
+                    if (!Wgl.wglMakeCurrent(_dc, IntPtr.Zero))
+                    {
+                        Console.WriteLine($"Can't ReleaseCurrent DC {_dc} context {_context}");
+                    }
+                    GlContextFactory.Current = null;
                 }
-                GlContextFactory.Current = null;
             }
-            //Console.WriteLine($"WinGlContext ReleaseCurrent DC {_dc} context {_context}");
             return this;
         }
 
@@ -363,9 +361,13 @@ namespace LightGL.Windows
             return this;
         }
 
-        public IGlContext SetSync(int Sync)
+        public IGlContext SetVSync(int vsync = 1)
         {
-            SetVSync(Sync);
+            if (Extension.wglSwapIntervalEXT != null)
+            {
+                // 0 = no vsync, 1 = vsync
+                Extension.wglSwapIntervalEXT(vsync);
+            }
             return this;
         }
 

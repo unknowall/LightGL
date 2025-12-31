@@ -11,6 +11,7 @@ namespace LightGL.Mac
         private bool _releaseWindow;
 
         private static readonly object _sharedLock = new object();
+        private static readonly object s_makeCurrentLock = new object();
         private static IntPtr _sharedContext;
         private static int _sharedRefCount;
 
@@ -254,20 +255,26 @@ namespace LightGL.Mac
 
         public IGlContext MakeCurrent()
         {
-            if (_glContext != IntPtr.Zero)
+            lock (s_makeCurrentLock)
             {
-                var selMakeCurrentContext = Selector.Get("makeCurrentContext");
-                objc_msgSend_void(_glContext, selMakeCurrentContext);
+                if (_glContext != IntPtr.Zero)
+                {
+                    var selMakeCurrentContext = Selector.Get("makeCurrentContext");
+                    objc_msgSend_void(_glContext, selMakeCurrentContext);
+                }
             }
             return this;
         }
 
         public IGlContext ReleaseCurrent()
         {
-            if (_glContext != IntPtr.Zero)
+            lock (s_makeCurrentLock)
             {
-                var selClearCurrent = Selector.Get("clearCurrentContext");
-                objc_msgSend_void(_glContext, selClearCurrent);
+                if (_glContext != IntPtr.Zero)
+                {
+                    var selClearCurrent = Selector.Get("clearCurrentContext");
+                    objc_msgSend_void(_glContext, selClearCurrent);
+                }
             }
             return this;
         }
@@ -282,7 +289,7 @@ namespace LightGL.Mac
             return this;
         }
 
-        public IGlContext SetSync(int Sync)
+        public IGlContext SetVSync(int vsync)
         {
             if (_glContext == IntPtr.Zero)
                 return this;
@@ -291,7 +298,7 @@ namespace LightGL.Mac
             var selSetValues = Selector.Get("setValues:forParameter:");
             int param = 222; // NSOpenGLCPSwapInterval
 
-            int[] values = new[] { Sync };
+            int[] values = new[] { vsync };
             GCHandle handle = GCHandle.Alloc(values, GCHandleType.Pinned);
             IntPtr valuesPtr = handle.AddrOfPinnedObject();
             try

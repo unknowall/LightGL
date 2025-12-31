@@ -6,6 +6,7 @@ namespace LightGL.Android
     public unsafe class AndroidGLContext : IGlContext
     {
         private static readonly object _sharedLock = new object();
+        private static readonly object s_makeCurrentLock = new object();
         private static IntPtr _sharedContext = IntPtr.Zero;
         private static int _sharedRefCount = 0;
 
@@ -125,13 +126,19 @@ namespace LightGL.Android
 
         public IGlContext MakeCurrent()
         {
-            EGL.eglMakeCurrent(Display, Surface, Surface, Context);
+            lock (s_makeCurrentLock)
+            {
+                EGL.eglMakeCurrent(Display, Surface, Surface, Context);
+            }
             return this;
         }
 
         public IGlContext ReleaseCurrent()
         {
-            EGL.eglMakeCurrent(Display, EGL.EGL_NO_SURFACE, EGL.EGL_NO_SURFACE, EGL.EGL_NO_CONTEXT);
+            lock (s_makeCurrentLock)
+            {
+                EGL.eglMakeCurrent(Display, EGL.EGL_NO_SURFACE, EGL.EGL_NO_SURFACE, EGL.EGL_NO_CONTEXT);
+            }
             return this;
         }
 
@@ -141,9 +148,9 @@ namespace LightGL.Android
             return this;
         }
 
-        public IGlContext SetSync(int Sync)
+        public IGlContext SetVSync(int vsync)
         {
-            EGL.eglSwapInterval(Display, Sync);
+            EGL.eglSwapInterval(Display, vsync);
             return this;
         }
 
