@@ -24,7 +24,7 @@ Wiki: https://deepwiki.com/unknowall/LightGL , https://zread.ai/unknowall/LightG
   - **Windows**: Built on WGL, supporting OpenGL 3.2+
   - **Linux**: Built on GLX, supporting the X11 window system with complete OpenGL context management for Linux platforms
   - **macOS**: Built on Cocoa’s `NSOpenGLContext`, supporting macOS’s native OpenGL framework
-  - **Android**: Provides a basic `AndroidGLContext` implementation based on the EGL (Embedded System Graphics Library) interface
+  - **Android**: Built on EGL (Embedded System Graphics Library) interface
 
 ### Comprehensive Feature Wrapper
 - Core functionality coverage: shader management, buffer objects, texture processing, matrix/vector operations, etc.
@@ -55,7 +55,7 @@ git clone https://github.com/unknowall/LightGL.git
 - Build the project
 
 ### 3. Integration & Usage
-Reference the LightGL.dll in your C# project, or install the LightGL package via NuGet. Refer to the following sample code to quickly implement basic rendering.:
+Reference the LightGL in your C# project, Refer to the following sample code to quickly implement basic rendering:
 
 ```csharp
 // 1. Create OpenGL context (window handle example)

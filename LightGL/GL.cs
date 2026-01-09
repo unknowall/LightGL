@@ -15,14 +15,13 @@
  * 
  */
 
+using LightGL.DynamicLibrary;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security;
-
-using LightGL.DynamicLibrary;
 
 namespace LightGL
 {
@@ -41,6 +40,7 @@ namespace LightGL
     public enum BufferTarget
     {
         ArrayBuffer = 0x8892,
+        UniformBuffer = 0x8A11,
         ElementArrayBuffer = 0x8893,
         ArrayBufferBinding = 0x8894,
         ElementArrayBufferBinding = 0x8895
@@ -274,6 +274,34 @@ namespace LightGL
         Texture = 0x1702
     }
 
+    public enum LightParameter : uint
+    {
+        Ambient = 0x1200,
+        Diffuse = 0x1201,
+        Specular = 0x1202,
+        Position = 0x1203,
+        SpotDirection = 0x1204,
+        SpotExponent = 0x1205,
+        SpotCutoff = 0x1206,
+        ConstantAttenuation = 0x1207,
+        LinearAttenuation = 0x1208,
+        QuadraticAttenuation = 0x1209
+    }
+
+    public enum LightModelParameter : uint
+    {
+        LightModelAmbient = 0x0B51,
+        LightModelLocalViewer = 0x0B53,
+        LightModelColorControl = 0x0B52,
+        LightModelTwoSide = 0x0B54
+    }
+
+    public enum LightModelColorControl : uint
+    {
+        SingleColor = 0x0B55,
+        SeparateSpecularColor = 0x81F9
+    }
+
     public unsafe class GL
     {
         internal static readonly object Lock = new object();
@@ -360,6 +388,7 @@ namespace LightGL
         public const int GL_ONE_MINUS_CONSTANT_ALPHA = 0x8004;
         public const int GL_BLEND_COLOR = 0x8005;
         public const int GL_ARRAY_BUFFER = 0x8892;
+        public const int GL_UNIFORM_BUFFER = 0x8A11;
         public const int GL_ELEMENT_ARRAY_BUFFER = 0x8893;
         public const int GL_ARRAY_BUFFER_BINDING = 0x8894;
         public const int GL_ELEMENT_ARRAY_BUFFER_BINDING = 0x8895;
@@ -636,13 +665,21 @@ namespace LightGL
         public const int GL_SHADER_STORAGE_BARRIER_BIT = 0x2000;
         public const int GL_SRC1_COLOR = 0x88F9;
         public const int GL_SRC1_ALPHA = 0x8589;
-        public const int GL_ONE_MINUS_SRC1_COLOR = 0x88FC;
-        public const int GL_ONE_MINUS_SRC1_ALPHA = 0x88FD;
+        public const int GL_ONE_MINUS_SRC1_COLOR = 0x88FA;
+        public const int GL_ONE_MINUS_SRC1_ALPHA = 0x88FB;
+        public const int GL_LIGHT0 = 0x4000;
+        public const int GL_LIGHT7 = 0x4007;
+        public const int GL_EMISSION = 0x1600;
+        public const int GL_AMBIENT = 0x1200;
+        public const int GL_DIFFUSE = 0x1201;
+        public const int GL_SPECULAR = 0x1202;
+        public const int GL_SHININESS = 0x1601;
 
         public static readonly glActiveTexture ActiveTexture;
         public static readonly glAttachShader AttachShader;
         public static readonly glBindAttribLocation BindAttribLocation;
         public static readonly glBindBuffer BindBuffer;
+        public static readonly glBindBufferBase BindBufferBase;
         public static readonly glBindFramebuffer BindFramebuffer;
         public static readonly glBindRenderbuffer BindRenderbuffer;
         public static readonly glBindTexture BindTexture;
@@ -832,6 +869,14 @@ namespace LightGL
         public static readonly glLoadIdentity LoadIdentity;
         public static readonly glMatrixMode MatrixMode;
         public static readonly glOrtho Ortho;
+        public static readonly glLightModelfv LightModelfv;
+        public static readonly glLightModeliv LightModeliv;
+        public static readonly glLightModelf LightModelf;
+        public static readonly glLightModeli LightModeli;
+        public static readonly glLightfv Lightfv;
+        public static readonly glLightiv Lightiv;
+        public static readonly glLightf Lightf;
+        public static readonly glLighti Lighti;
 
         public static void ClearError()
         {
@@ -848,7 +893,8 @@ namespace LightGL
                 var Error = GetError();
                 if (Error != GL_NO_ERROR)
                     throw new Exception($"{prefix} glError: 0x{Error:X4}");
-            } finally
+            }
+            finally
             {
                 ClearError();
             }
@@ -859,7 +905,8 @@ namespace LightGL
             if (EnableDisable)
             {
                 Enable(EnableCap);
-            } else
+            }
+            else
             {
                 Disable(EnableCap);
             }
@@ -887,6 +934,9 @@ namespace LightGL
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
     public delegate void glBindBuffer(int target, uint buffer);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+    public delegate void glBindBufferBase(int target, uint slot, uint buffer);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
     public delegate void glBindFramebuffer(int target, uint framebuffer);
@@ -1319,7 +1369,7 @@ namespace LightGL
     public delegate void glViewport(int x, int y, int width, int height);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-    public delegate void glMaterialfv(int face, int pname, float[] @params);
+    public unsafe delegate void glMaterialfv(int face, int pname, float* value);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
     public delegate void glMaterialf(int face, int pname, float param);
@@ -1363,5 +1413,29 @@ namespace LightGL
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
     public delegate uint glOrtho(double left, double right, double bottom, double top, double zNear, double zFar);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+    public unsafe delegate void glLightModelfv(uint pname, float* value);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+    public unsafe delegate void glLightModeliv(uint pname, uint* value);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+    public delegate void glLightModelf(uint pname, float value);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+    public delegate void glLightModeli(uint pname, uint value);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+    public unsafe delegate void glLightfv(uint light, uint pname, float* value);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+    public unsafe delegate void glLightiv(uint light, uint pname, uint* value);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+    public delegate void glLightf(uint light, uint pname, float value);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+    public delegate void glLighti(uint light, uint pname, uint value);
 
 }

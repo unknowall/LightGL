@@ -1,9 +1,9 @@
-﻿using System;
+﻿using LightGL.DynamicLibrary;
+using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Threading;
-using LightGL.DynamicLibrary;
 using static LightGL.GlContextFactory;
 
 namespace LightGL.Windows
@@ -205,7 +205,7 @@ namespace LightGL.Windows
                     while (!Wgl.wglShareLists(_sharedContext, _context))
                     {
                         var lastError = Platform.InternalWindows.GetLastError();
-                        Console.WriteLine($"Can't share lists {lastError}");
+                        //Console.WriteLine($"Can't share lists {lastError}");
                         if (lastError == 170) // ERROR_BUSY
                         {
                             attempts++;
@@ -393,6 +393,7 @@ namespace LightGL.Windows
                     }
                 }
             }
+
             ReleaseDC(_hWnd, _dc);
         }
     }
