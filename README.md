@@ -42,7 +42,7 @@ LightGL专为高性能图形渲染打造，相比通用 OpenGL 封装库，调�
   - Windows 平台：使用 WGL 实现，支持 OpenGL 3.2 +
   - Linux 平台：使用 GLX 实现，支持 X11 窗口系统，提供了完整的 Linux 平台 OpenGL 上下文管理
   - macOS 平台：使用 Cocoa 的 NSOpenGLContext 实现，支持 macOS 的原生 OpenGL 框架
-  - Android 平台：提供了基本的 AndroidGLContext 实现，基于 EGL（Embedded System Graphics Library）接口
+  - Android 平台：使用 EGL（Embedded System Graphics Library）实现
 
 ### 📦 完整功能封装
 - 核心功能覆盖：着色器管理、缓冲区对象、纹理处理、矩阵/向量运算等
@@ -74,7 +74,7 @@ git clone https://github.com/unknowall/LightGL.git
 ```
 nuget:
 ```bash
-dotnet add package LightGL --version 1.0.2
+dotnet add package LightGL --version 1.0.4
 ```
 
 ### 2. 编译项目
@@ -215,7 +215,7 @@ LightGL/
   - **Windows**: Built on WGL, supporting OpenGL 3.2+
   - **Linux**: Built on GLX, supporting the X11 window system with complete OpenGL context management for Linux platforms
   - **macOS**: Built on Cocoa’s `NSOpenGLContext`, supporting macOS’s native OpenGL framework
-  - **Android**: Provides a basic `AndroidGLContext` implementation based on the EGL (Embedded System Graphics Library) interface
+  - **Android**: Built on EGL (Embedded System Graphics Library) interface
 
 ### 📦 Comprehensive Feature Wrapper
 - Core functionality coverage: shader management, buffer objects, texture processing, matrix/vector operations, etc.
@@ -242,7 +242,7 @@ git clone https://github.com/unknowall/LightGL.git
 ```
 nuget:
 ```bash
-dotnet add package LightGL --version 1.0.2
+dotnet add package LightGL --version 1.0.4
 ```
 
 ### 2. Build the Project
