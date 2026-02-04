@@ -73,7 +73,6 @@ namespace LightGL
 
         public GLBuffer SetStructData<T>(T Data)
         {
-            if (Data == null) return this;
             int size = Marshal.SizeOf(typeof(T));
             IntPtr Ptr = Marshal.AllocHGlobal(size);
             try
